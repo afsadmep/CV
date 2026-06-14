@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Afsad Alam – MEP Supervisor</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #fff;
+            --snd-bg-color: #e8f4f3;
+            --text-color: #0a0c12;
+            --text-muted: #1e293b;
+            --main-color: #007F73;
+            --shadow: 0 8px 20px rgba(0, 127, 115, 0.1);
+            --transition-smooth: 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; border: none; outline: none; scroll-behavior: smooth; }
+        html { font-size: 62.5%; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        h1, h2, h3, h4, .logo, .btn, .navbar a, .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
+        section, .services-box, .skill-card, .timeline-item, .project-card { will-change: transform, opacity; }
+        section { min-height: 100vh; padding: 10rem 9% 2rem; opacity: 0; }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed; width: 100%; top: 0; left: 0;
+            padding: 1.4rem 9%;
+            background: linear-gradient(135deg, #0a0c12 0%, #0d1b1a 100%);
+            display: flex; align-items: center; justify-content: space-between;
+            z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+        }
+        .logo-area { display: flex; flex-direction: column; align-items: flex-start; }
+        .logo { font-size: 2.4rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+        .logo span { color: var(--main-color); }
+        .live-stats {
+            display: flex; align-items: center; font-size: 1.3rem; font-weight: 500;
+            color: rgba(255,255,255,0.85); margin-top: 0.3rem; white-space: nowrap;
+        }
+        .activity-dot {
+            display: inline-block; width: 7px; height: 7px; background: #2ecc71;
+            border-radius: 50%; margin: 0 0.6rem 0 0.8rem;
+            box-shadow: 0 0 5px #2ecc71; animation: pulseDot 1.5s infinite;
+        }
+        @keyframes pulseDot { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:.5} }
+        #visitorCount, #onlineCount { color: #fff; margin-right: 0.35rem; }
+        @media(max-width:768px){.live-stats{display:none}}
+
+        .navbar a {
+            font-size: 1.5rem; color: rgba(255,255,255,0.85); margin-left: 2.8rem;
+            font-weight: 600; transition: color 0.3s; position: relative;
+        }
+        .navbar a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--main-color);
+            transition: width 0.3s ease;
+        }
+        .navbar a:hover::after, .navbar a.active::after { width: 100%; }
+        .navbar a:hover, .navbar a.active { color: var(--main-color); }
+
+        #menu-icon { font-size: 3.2rem; color: #fff; cursor: pointer; display: none; }
+        @media(max-width:768px){
+            #menu-icon{display:block}
+            .navbar{
+                position:fixed;top:70px;left:0;width:100%;background:#0a0c12;
+                display:flex;flex-direction:column;padding:2rem 9%;
+                opacity:0;pointer-events:none;transform:translateY(-15px);
+                transition:all 0.35s ease;
+            }
+            .navbar.active{opacity:1;pointer-events:all;transform:translateY(0)}
+            .navbar a{margin:1rem 0;font-size:1.7rem}
+        }
+
+        /* ===== HOME ===== */
+        .home {
+            display: flex; align-items: center; gap: 6rem;
+            background: linear-gradient(135deg, #0a0c12 0%, #0d1b1a 50%, #001a18 100%);
+            color: #fff; padding-top: 12rem;
+        }
+        .home-img { flex-shrink: 0; }
+        .home-img img {
+            width: 28rem; height: 28rem; object-fit: cover; object-position: top;
+            border-radius: 50%;
+            border: 4px solid var(--main-color);
+            box-shadow: 0 0 0 8px rgba(0,127,115,0.15), 0 20px 60px rgba(0,0,0,0.5);
+            animation: floatImg 4s ease-in-out infinite;
+        }
+        @keyframes floatImg { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+        .home-content h1 { font-size: 5rem; line-height: 1.1; margin-bottom: 1rem; }
+        .home-content h1 span { color: var(--main-color); }
+        .home-content h3 { font-size: 2.2rem; font-weight: 500; color: rgba(255,255,255,0.75); margin-bottom: 2rem; }
+        .home-content h3 span { color: var(--main-color); font-weight: 700; }
+        .home-content p { font-size: 1.6rem; color: rgba(255,255,255,0.7); max-width: 55rem; margin-bottom: 3rem; line-height: 1.8; }
+        .social-media { display: flex; gap: 1.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .social-media a {
+            width: 4.5rem; height: 4.5rem; border-radius: 50%;
+            border: 2px solid var(--main-color);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--main-color); font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        .social-media a:hover { background: var(--main-color); color: #fff; transform: translateY(-4px); }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            padding: 1.2rem 2.8rem; background: var(--main-color);
+            color: #fff; border-radius: 5rem; font-size: 1.6rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,127,115,0.35);
+        }
+        .btn:hover { background: #005f56; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,127,115,0.45); }
+        @media(max-width:768px){
+            .home{flex-direction:column;text-align:center;gap:3rem;padding-top:11rem}
+            .home-img img{width:20rem;height:20rem}
+            .home-content h1{font-size:3.5rem}
+            .social-media{justify-content:center}
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            display: flex; gap: 6rem; align-items: center;
+            background: var(--snd-bg-color);
+        }
+        .about-content { flex: 1; }
+        .heading { font-size: 4rem; margin-bottom: 1rem; }
+        .heading span { color: var(--main-color); }
+        .about-content h3 { font-size: 2rem; color: var(--main-color); font-weight: 600; margin-bottom: 1.5rem; }
+        .about-content p { font-size: 1.55rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 2rem; }
+        .about-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin: 2rem 0; }
+        .stat-chip {
+            display: flex; flex-direction: column; align-items: center; padding: 1.5rem 2.5rem;
+            background: #fff; border-radius: 1.5rem;
+            box-shadow: var(--shadow); border-left: 4px solid var(--main-color);
+        }
+        .stat-chip strong { font-size: 2.6rem; color: var(--main-color); font-weight: 800; }
+        .stat-chip span { font-size: 1.3rem; color: var(--text-muted); font-weight: 500; margin-top: 0.3rem; text-align: center; }
+        .about-icon-side {
+            flex: 0 0 30rem; display: flex; flex-direction: column; align-items: center;
+            gap: 3rem;
+        }
+        .about-icon-badge {
+            width: 18rem; height: 18rem; border-radius: 50%;
+            background: linear-gradient(135deg, var(--main-color), #004d45);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,127,115,0.3);
+            animation: floatImg 4s ease-in-out infinite;
+        }
+        .about-icon-badge i { font-size: 6rem; color: #fff; }
+        .about-icon-badge span { font-size: 1.5rem; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 0.5rem; }
+        @media(max-width:900px){
+            .about{flex-direction:column}
+            .about-icon-side{flex:none}
+        }
+
+        /* ===== SERVICES ===== */
+        .services { background: var(--bg-color); }
+        .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr)); gap: 3rem; margin-top: 5rem; }
+        .services-box {
+            background: #fff; padding: 4rem 3rem; border-radius: 2rem;
+            box-shadow: var(--shadow); text-align: center;
+            border: 1px solid rgba(0,127,115,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .services-box:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,127,115,0.18); }
+        .services-box i { font-size: 5rem; color: var(--main-color); margin-bottom: 2rem; display: block; }
+        .services-box h3 { font-size: 2rem; margin-bottom: 1.5rem; }
+        .services-box p { font-size: 1.5rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
+
+        /* ===== SKILLS ===== */
+        .skills-section { background: var(--snd-bg-color); }
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); gap: 3rem; margin-top: 5rem; }
+        .skill-card {
+            background: #fff; padding: 3rem; border-radius: 2rem;
+            box-shadow: var(--shadow); border-top: 4px solid var(--main-color);
+        }
+        .skill-card h3 { font-size: 1.8rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+        .skill-card h3 i { color: var(--main-color); }
+        .skill-item { margin-bottom: 1.8rem; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 0.7rem; font-size: 1.45rem; font-weight: 500; }
+        .skill-number { color: var(--main-color); }
+        .progress-bar { background: rgba(0,127,115,0.12); border-radius: 5rem; height: 0.9rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--main-color), #00a896); border-radius: 5rem; width: 0; transition: width 1.2s ease; }
+
+        /* ===== TIMELINE ===== */
+        .timeline-section { background: var(--bg-color); }
+        .timeline { position: relative; margin-top: 5rem; max-width: 80rem; margin-left: auto; margin-right: auto; }
+        .timeline::before {
+            content: ''; position: absolute; left: 1.8rem; top: 0; bottom: 0;
+            width: 3px; background: linear-gradient(to bottom, var(--main-color), rgba(0,127,115,0.15));
+            border-radius: 3px;
+        }
+        .timeline-item { padding-left: 5.5rem; margin-bottom: 4rem; position: relative; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: 0.7rem; top: 0.5rem;
+            width: 2.2rem; height: 2.2rem; border-radius: 50%;
+            background: var(--main-color); border: 3px solid #fff;
+            box-shadow: 0 0 0 3px var(--main-color);
+        }
+        .timeline-content {
+            background: #fff; padding: 2.5rem 3rem; border-radius: 1.5rem;
+            box-shadow: var(--shadow); border-left: 4px solid var(--main-color);
+            transition: transform 0.3s;
+        }
+        .timeline-content:hover { transform: translateX(6px); }
+        .timeline-date { font-size: 1.35rem; color: var(--main-color); font-weight: 600; margin-bottom: 0.5rem; }
+        .timeline-content h3 { font-size: 1.9rem; margin-bottom: 0.4rem; }
+        .timeline-company { font-size: 1.45rem; color: var(--main-color); font-weight: 600; margin-bottom: 1.2rem; }
+        .timeline-list { padding-left: 1.8rem; }
+        .timeline-list li { font-size: 1.45rem; color: var(--text-muted); margin-bottom: 0.5rem; line-height: 1.7; }
+
+        /* ===== PROJECTS / CERTIFICATIONS ===== */
+        .projects-section { background: var(--snd-bg-color); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); gap: 3rem; margin-top: 5rem; }
+        .project-card {
+            background: #fff; border-radius: 2rem; overflow: hidden;
+            box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,127,115,0.18); }
+        .project-img { width: 100%; height: 20rem; object-fit: cover; }
+        .project-info { padding: 2.5rem; }
+        .project-info h3 { font-size: 1.9rem; margin-bottom: 1rem; }
+        .project-info p { font-size: 1.45rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.5rem; }
+        .tech { padding: 0.4rem 1.2rem; background: rgba(0,127,115,0.1); color: var(--main-color); border-radius: 5rem; font-size: 1.25rem; font-weight: 600; }
+
+        /* ===== CONTACT ===== */
+        .contact { background: var(--bg-color); }
+        .contact form { max-width: 80rem; margin: 5rem auto 0; }
+        .input-box { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        .input-box input, textarea {
+            width: 100%; padding: 1.6rem 2rem; border-radius: 1.2rem;
+            border: 2px solid rgba(0,127,115,0.2); font-family: 'Inter', sans-serif;
+            font-size: 1.55rem; color: var(--text-color); background: #fff;
+            transition: border-color 0.3s;
+        }
+        .input-box input:focus, textarea:focus { border-color: var(--main-color); }
+        textarea { width: 100%; resize: vertical; margin-bottom: 2rem; }
+        .form-message { font-size: 1.6rem; text-align: center; margin-top: 2rem; padding: 1.2rem 2rem; border-radius: 1.2rem; font-weight: 600; display: none; }
+        .form-message.success { background: rgba(0,127,115,0.12); color: var(--main-color); }
+        .form-message.error { background: rgba(255,59,59,0.08); color: #d32f2f; }
+        @media(max-width:600px){ .input-box{grid-template-columns:1fr} }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0a0c12; padding: 3rem 9%; text-align: center;
+        }
+        .footer .social { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .footer .social a {
+            width: 4.5rem; height: 4.5rem; border-radius: 50%; border: 2px solid var(--main-color);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--main-color); font-size: 2rem; transition: all 0.3s;
+        }
+        .footer .social a:hover { background: var(--main-color); color: #fff; transform: translateY(-4px); }
+        .footer .copyright { font-size: 1.4rem; color: rgba(255,255,255,0.5); }
+
+        /* ===== SCROLL PROGRESS ===== */
+        .scroll-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--main-color), #00a896);
+            z-index: 9999; width: 0%; transition: width 0.1s;
+        }
+
+        /* ===== WHATSAPP FLOAT ===== */
+        .wa-float { position: fixed; bottom: 3rem; right: 3rem; z-index: 999; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+        .wa-float.wa-visible { opacity: 1; pointer-events: all; }
+        .wa-tip { font-size: 1.2rem; font-weight: 600; color: #fff; background: #0a0c12; padding: 0.5rem 1rem; border-radius: 0.6rem; white-space: nowrap; opacity: 0; transform: translateY(5px); transition: opacity 0.22s, transform 0.22s; position: relative; }
+        .wa-tip::after { content:''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #0a0c12; }
+        .wa-float:hover .wa-tip { opacity: 1; transform: translateY(0); }
+        .wa-btn { width: 60px; height: 60px; background: var(--main-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 22px rgba(0,127,115,0.45); position: relative; transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.3s; }
+        .wa-btn i { font-size: 3rem; color: #fff; line-height: 1; position: relative; z-index: 1; }
+        .wa-btn:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 12px 32px rgba(0,127,115,0.55); }
+        .wa-btn::before, .wa-btn::after { content:''; position: absolute; inset: 0; border-radius: 50%; background: rgba(0,127,115,0.32); animation: waPulse 2.5s ease-out infinite; pointer-events: none; }
+        .wa-btn::after { background: rgba(0,127,115,0.16); animation-delay: 0.9s; }
+        @keyframes waPulse { 0%{transform:scale(1);opacity:.8} 100%{transform:scale(2.4);opacity:0} }
+        .wa-dot { position: absolute; top: 3px; right: 3px; width: 13px; height: 13px; background: #ff3b3b; border-radius: 50%; border: 2.5px solid #fff; animation: waDot 2.2s ease-in-out infinite; z-index: 2; }
+        @keyframes waDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+        @media(max-width:768px){ .wa-float{bottom:2rem;right:1rem} .wa-btn{width:45px;height:45px} .wa-btn i{font-size:2.6rem} }
+
+        /* ============================================
+           COMPREHENSIVE MOBILE RESPONSIVE STYLES
+        ============================================ */
+
+        /* === TABLET (max 992px) === */
+        @media (max-width: 992px) {
+            html { font-size: 56.25%; }
+            section { padding: 10rem 6% 4rem; }
+            .header { padding: 1.4rem 6%; }
+            .home { gap: 4rem; padding-top: 11rem; }
+            .home-img img { width: 24rem; height: 24rem; }
+            .home-content h1 { font-size: 4.2rem; }
+            .about { gap: 4rem; }
+            .about-icon-side { flex: 0 0 22rem; }
+            .about-icon-badge { width: 15rem; height: 15rem; }
+            .about-icon-badge i { font-size: 4.5rem; }
+            .services-container { grid-template-columns: repeat(2, 1fr); }
+            .skills-container { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .heading { font-size: 3.5rem; }
+        }
+
+        /* === MOBILE (max 768px) === */
+        @media (max-width: 768px) {
+            html { font-size: 52%; }
+            section { padding: 9rem 5% 4rem; min-height: auto; }
+            .header { padding: 1.2rem 5%; }
+            .home { flex-direction: column; text-align: center; gap: 3rem; padding-top: 10rem; padding-bottom: 5rem; }
+            .home-img img { width: 18rem; height: 18rem; }
+            .home-content h1 { font-size: 3.8rem; }
+            .home-content h3 { font-size: 2rem; }
+            .home-content p { font-size: 1.55rem; max-width: 100%; }
+            .social-media { justify-content: center; }
+            .btn { font-size: 1.5rem; padding: 1.1rem 2.4rem; }
+            .about { flex-direction: column; gap: 3rem; text-align: center; }
+            .about-content h2 { text-align: center !important; }
+            .about-stats { justify-content: center; }
+            .stat-chip { padding: 1.2rem 2rem; }
+            .stat-chip strong { font-size: 2.2rem; }
+            .about-icon-side { display: none; }
+            .services-container { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
+            .services-box { padding: 3rem 2.5rem; }
+            .services-box i { font-size: 4rem; }
+            .services-box h3 { font-size: 1.9rem; }
+            .skills-container { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
+            .skill-card { padding: 2.5rem; }
+            .skill-card h3 { font-size: 1.7rem; }
+            .timeline { margin-top: 3rem; }
+            .timeline::before { left: 1.2rem; }
+            .timeline-item { padding-left: 4rem; margin-bottom: 3rem; }
+            .timeline-item::before { left: 0.2rem; width: 2rem; height: 2rem; }
+            .timeline-content { padding: 2rem; }
+            .timeline-content h3 { font-size: 1.75rem; }
+            .timeline-company { font-size: 1.35rem; }
+            .timeline-list li { font-size: 1.38rem; }
+            .timeline-date { font-size: 1.28rem; }
+            .projects-grid { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
+            .project-img { height: 17rem; }
+            .project-info { padding: 2rem; }
+            .project-info h3 { font-size: 1.75rem; }
+            .contact form { margin-top: 3rem; }
+            .input-box { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+            .input-box input, textarea { font-size: 1.5rem; padding: 1.4rem 1.6rem; }
+            textarea { margin-bottom: 1.5rem; }
+            .heading { font-size: 3.2rem; }
+            .footer { padding: 2.5rem 5%; }
+            .footer .copyright { font-size: 1.3rem; }
+        }
+
+        /* === SMALL MOBILE (max 480px) === */
+        @media (max-width: 480px) {
+            html { font-size: 48%; }
+            section { padding: 9rem 4% 3rem; }
+            .header { padding: 1.2rem 4%; }
+            .home-img img { width: 16rem; height: 16rem; }
+            .home-content h1 { font-size: 3.4rem; }
+            .home-content h3 { font-size: 1.8rem; }
+            .home-content p { font-size: 1.5rem; }
+            .heading { font-size: 2.8rem; }
+            .stat-chip { padding: 1rem 1.5rem; flex: 1 1 auto; min-width: 12rem; }
+            .stat-chip strong { font-size: 2rem; }
+            .about-stats { gap: 1.2rem; }
+            .services-box h3 { font-size: 1.75rem; }
+            .services-box p { font-size: 1.4rem; }
+            .timeline-content { padding: 1.6rem; }
+            .timeline-content h3 { font-size: 1.6rem; }
+            .timeline-list li { font-size: 1.32rem; }
+            .project-info h3 { font-size: 1.6rem; }
+            .project-info p { font-size: 1.38rem; }
+            .footer .social a { width: 4rem; height: 4rem; font-size: 1.7rem; }
+        }
+
+        /* === TOUCH DEVICE: disable sticky hover effects === */
+        @media (hover: none) {
+            .services-box:hover,
+            .project-card:hover,
+            .timeline-content:hover,
+            .social-media a:hover,
+            .btn:hover,
+            .footer .social a:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-bar" id="scrollBar"></div>
+
+    <header class="header">
+        <div class="logo-area">
+            <a href="#home" class="logo">Afsad <span>Alam</span></a>
+            <div class="live-stats">
+                <i class="bx bx-show"></i>
+                <span id="visitorCount">42</span> visitors
+                <span class="activity-dot"></span>
+                <span id="onlineCount">5</span> online
+            </div>
+        </div>
+        <i class="bx bx-menu" id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HOME -->
+    <section id="home" class="home">
+        <div class="home-img">
+            <img src="Afsad.jpg" alt="Afsad Alam – MEP Supervisor">
+        </div>
+        <div class="home-content">
+            <h1>Afsad <span>Alam</span></h1>
+            <h3>I'm a <span class="multiple-text"></span></h3>
+            <p>MEP Supervisor with <strong>12+ years</strong> of experience in electrical installation, maintenance, testing & commissioning of HT/LV systems — delivering safe, high-quality projects across <strong>Kuwait & UAE</strong>.</p>
+            <div class="social-media">
+                <a href="tel:+971555728653" title="Call Me"><i class="fas fa-phone"></i></a>
+                <a href="mailto:afsad6120@gmail.com" title="Email Me"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/971555728653?text=Hello%20Afsad%2C%20I%20want%20to%20connect%20with%20you" target="_blank" title="WhatsApp"><i class="bx bxl-whatsapp"></i></a>
+            </div>
+            <a href="Afsad_Alam_MEP Supervisor_CV.pdf" download="Afsad_Alam_MEP Supervisor_CV" class="btn">Download CV <i class="fas fa-download"></i></a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2 class="heading" style="text-align:left;">About <span>Me</span></h2>
+            <h3><span>MEP Supervisor & Electrical Systems Expert</span></h3>
+            <p>Experienced MEP Supervisor with over <strong>12 years</strong> of hands-on expertise in electrical installation, preventive maintenance, testing, and commissioning of HT/LV systems. Currently based in <strong>Jabal Ali Parco, Dubai</strong>.</p>
+            <p>Proven ability to manage site operations, lead multi-disciplinary teams, ensure stringent quality standards, and deliver complex MEP projects safely and on time — with a strong focus on <strong>HSE compliance</strong> and permit-to-work procedures.</p>
+            <div class="about-stats">
+                <div class="stat-chip"><strong>12+</strong><span>Years Experience</span></div>
+                <div class="stat-chip"><strong>11kV</strong><span>HT Switchgear</span></div>
+                <div class="stat-chip"><strong>3</strong><span>Countries Worked</span></div>
+            </div>
+            <a href="#contact" class="btn">Let's Connect</a>
+        </div>
+        <div class="about-icon-side">
+            <div class="about-icon-badge">
+                <i class="fas fa-bolt"></i>
+                <span>MEP Expert</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+        <h2 class="heading">My <span>Services</span></h2>
+        <div class="services-container">
+            <div class="services-box">
+                <i class="bx bx-plug"></i>
+                <h3>HT/LV Installation & Commissioning</h3>
+                <p>End-to-end supervision of 11kV switchgear, substation installation, HT cable laying, breaker timing tests, and full commissioning in compliance with IEC standards.</p>
+                <a href="#contact" class="btn">Hire Me</a>
+            </div>
+            <div class="services-box">
+                <i class="bx bx-wrench"></i>
+                <h3>Preventive & Corrective Maintenance</h3>
+                <p>Scheduled PM of DB panels, breakers, relays, and protection systems. Corrective maintenance including insulation testing, contact resistance testing, and root-cause analysis.</p>
+                <a href="#contact" class="btn">Hire Me</a>
+            </div>
+            <div class="services-box">
+                <i class="bx bx-group"></i>
+                <h3>Site Supervision & Team Leadership</h3>
+                <p>Leading teams of electricians and technicians on MEP project sites — coordinating MEP activities, enforcing HSE, managing permit-to-work, and ensuring quality & safety standards.</p>
+                <a href="#contact" class="btn">Hire Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills-section">
+        <h2 class="heading">Technical <span>Skills</span></h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <h3><i class="fas fa-bolt"></i> Electrical Systems</h3>
+                <div class="skill-item"><div class="skill-info"><span>HT/LV Switchgear</span><span class="skill-number" data-target="95">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="95"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>Testing & Commissioning</span><span class="skill-number" data-target="92">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="92"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>Cable Testing & Termination</span><span class="skill-number" data-target="90">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="90"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>Fire Alarm Systems</span><span class="skill-number" data-target="80">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="80"></div></div></div>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-hard-hat"></i> Site & Safety</h3>
+                <div class="skill-item"><div class="skill-info"><span>HSE Compliance & PTW</span><span class="skill-number" data-target="95">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="95"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>MEP Project Supervision</span><span class="skill-number" data-target="92">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="92"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>Load Balancing & Distribution</span><span class="skill-number" data-target="85">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="85"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>Earthing & Insulation</span><span class="skill-number" data-target="88">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="88"></div></div></div>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-language"></i> Languages</h3>
+                <div class="skill-item"><div class="skill-info"><span>Hindi / Urdu</span><span class="skill-number" data-target="100">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="100"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>English</span><span class="skill-number" data-target="85">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="85"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>Arabic</span><span class="skill-number" data-target="50">0%</span></div><div class="progress-bar"><div class="progress-fill" data-progress="50"></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="timeline-section">
+        <h2 class="heading">Professional <span>Experience</span></h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">June 2022 – June 2025</div>
+                    <h3>MEP Supervisor</h3>
+                    <div class="timeline-company">AL-AHLIA SWITCHGEAR – Kuwait</div>
+                    <ul class="timeline-list">
+                        <li>Supervised 11kV switchgear and substation installation and commissioning</li>
+                        <li>Coordinated MEP activities as per project requirements</li>
+                        <li>Led a team of electricians and technicians, ensuring quality & safety</li>
+                        <li>Maintained HT switchgear, breakers, and relays</li>
+                        <li>Conducted insulation, contact resistance, and breaker timing tests</li>
+                        <li>Ensured HSE compliance and permit-to-work procedures</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">January 2018 – September 2020</div>
+                    <h3>MEP Technician</h3>
+                    <div class="timeline-company">AL-AHLIA SWITCHGEAR – Kuwait</div>
+                    <ul class="timeline-list">
+                        <li>Performed preventive and corrective maintenance of 11kV switchgear and protection systems</li>
+                        <li>Conducted relay testing for overcurrent, earth fault, and differential protection</li>
+                        <li>Supported commissioning and shutdown maintenance activities</li>
+                        <li>Coordinated with engineers to resolve technical issues</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">December 2016 – April 2017</div>
+                    <h3>Building Maintenance Technician</h3>
+                    <div class="timeline-company">AYOKI CONST LLC – UAE</div>
+                    <ul class="timeline-list">
+                        <li>Executed electrical installation and maintenance works</li>
+                        <li>Performed cable laying, termination, and panel wiring</li>
+                        <li>Conducted testing and inspections of electrical systems</li>
+                        <li>Coordinated MEP activities with site teams</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">2011 – 2016</div>
+                    <h3>Electrical Technician / Industrial Electrician</h3>
+                    <div class="timeline-company">LARSEN & TOUBRO LTD, GOPINATH ENG. PVT. LTD, PETRON ENG. CONS. LTD, JECON ENGINEERS PVT LTD – India</div>
+                    <ul class="timeline-list">
+                        <li>MEP electrical installation and maintenance at HPCL & BPCL Refinery, Mumbai</li>
+                        <li>Industrial MEP electrical projects including panel installation, motors and power distribution systems</li>
+                        <li>MEP electrical works and cable termination at RIL Hazira</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS / EDUCATION -->
+    <section id="certifications" class="projects-section">
+        <h2 class="heading">Education & <span>Certifications</span></h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img class="project-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&auto=format" alt="Education">
+                <div class="project-info">
+                    <h3>Diploma in Electrical Engineering</h3>
+                    <div class="tech-tags"><span class="tech">Electrical</span><span class="tech">2008–2011</span></div>
+                    <p>Millenium Institute of Technology & Science, Bhopal. Specialized in electrical systems, circuit design, and industrial maintenance.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img class="project-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format" alt="HSE">
+                <div class="project-info">
+                    <h3>HSE Compliance & PTW</h3>
+                    <div class="tech-tags"><span class="tech">Safety</span><span class="tech">Kuwait</span></div>
+                    <p>Certified in Health, Safety & Environment (HSE) compliance and Permit-to-Work (PTW) procedures — applied across all major project sites.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img class="project-img" src="https://images.unsplash.com/photo-1547954575-855750c57bd3?w=600&auto=format" alt="Switchgear">
+                <div class="project-info">
+                    <h3>HT Switchgear & Relay Testing</h3>
+                    <div class="tech-tags"><span class="tech">11kV</span><span class="tech">Commissioning</span></div>
+                    <p>Extensive hands-on experience with 11kV switchgear commissioning, relay protection testing (overcurrent, earth fault, differential) and insulation resistance testing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+        <form id="contactForm">
+            <div class="input-box">
+                <input type="text" name="name" placeholder="Your Full Name" required>
+                <input type="email" name="email" placeholder="Your Email Address" required>
+            </div>
+            <div class="input-box">
+                <input type="tel" name="number" placeholder="Phone Number">
+                <input type="text" name="subject" placeholder="Subject">
+            </div>
+            <textarea name="message" rows="8" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message <i class="fas fa-paper-plane"></i></button>
+            <div class="form-message" id="formMessage"></div>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="social">
+            <a href="tel:+971555728653" title="Call"><i class="fas fa-phone"></i></a>
+            <a href="mailto:afsad6120@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/971555728653?text=Hello%20Afsad%2C%20I%20want%20to%20connect%20with%20you" target="_blank" title="WhatsApp"><i class="bx bxl-whatsapp"></i></a>
+        </div>
+        <p class="copyright">© Afsad Alam — MEP Supervisor | All Rights Reserved</p>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <div class="wa-float">
+        <div class="wa-tip">Chat on WhatsApp</div>
+        <a href="https://wa.me/971555728653?text=Hello%20Afsad%2C%20I%20want%20to%20connect%20with%20you" target="_blank" rel="noopener noreferrer" class="wa-btn" aria-label="Chat on WhatsApp">
+            <i class="bx bxl-whatsapp"></i>
+            <span class="wa-dot"></span>
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.js"></script>
+    <script>
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const el = document.getElementById('scrollBar');
+            const h = document.documentElement;
+            const pct = (window.scrollY / (h.scrollHeight - h.clientHeight)) * 100;
+            el.style.width = pct + '%';
+        });
+
+        // Mobile menu
+        const menuIcon = document.querySelector('#menu-icon');
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.navbar a');
+        menuIcon.onclick = () => { menuIcon.classList.toggle('bx-x'); navbar.classList.toggle('active'); };
+        navLinks.forEach(l => l.addEventListener('click', () => { menuIcon.classList.remove('bx-x'); navbar.classList.remove('active'); }));
+
+        // Active link + WhatsApp visibility
+        window.onscroll = () => {
+            menuIcon.classList.remove('bx-x'); navbar.classList.remove('active');
+            let sections = document.querySelectorAll('section'), current = '';
+            sections.forEach(s => {
+                if (pageYOffset >= s.offsetTop - 150 && pageYOffset < s.offsetTop - 150 + s.clientHeight) current = s.getAttribute('id');
+            });
+            navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === `#${current}`) l.classList.add('active'); });
+            const aboutEl = document.getElementById('about');
+            if (aboutEl && window.scrollY > aboutEl.offsetTop + aboutEl.offsetHeight * 0.3) {
+                document.querySelector('.wa-float').classList.add('wa-visible');
+            } else {
+                document.querySelector('.wa-float').classList.remove('wa-visible');
+            }
+            // scroll bar
+            const h = document.documentElement;
+            document.getElementById('scrollBar').style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+        };
+
+        // Typed.js
+        if (typeof Typed !== 'undefined') {
+            new Typed('.multiple-text', {
+                strings: ['MEP Supervisor', 'Electrical Expert', 'HT/LV Specialist', 'Site Engineer', 'Commissioning Engineer'],
+                typeSpeed: 80, backSpeed: 80, backDelay: 1200, loop: true
+            });
+        }
+
+        // GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('section').forEach((section, i) => {
+            gsap.fromTo(section, { opacity: 0, y: 40 }, {
+                opacity: 1, y: 0, duration: 0.8, delay: i === 0 ? 0 : 0.1, ease: "power2.out",
+                scrollTrigger: { trigger: section, start: 'top 85%', toggleActions: 'play none none none' }
+            });
+        });
+        gsap.fromTo('.services-box', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out", scrollTrigger: { trigger: '.services-container', start: 'top 80%' } });
+        gsap.fromTo('.skill-card', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, stagger: 0.12, ease: "power2.out", scrollTrigger: { trigger: '.skills-container', start: 'top 80%' } });
+        gsap.fromTo('.timeline-item', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.6, stagger: 0.2, ease: "power2.out", scrollTrigger: { trigger: '.timeline', start: 'top 80%' } });
+        gsap.fromTo('.project-card', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out", scrollTrigger: { trigger: '.projects-grid', start: 'top 80%' } });
+
+        // Skill counters
+        const skillNumbers = document.querySelectorAll('.skill-number');
+        function animateNumbers() {
+            skillNumbers.forEach(el => {
+                const target = parseInt(el.getAttribute('data-target'));
+                let current = 0, increment = target / 40;
+                const update = () => {
+                    current += increment;
+                    if (current >= target) { el.textContent = target + '%'; return; }
+                    el.textContent = Math.floor(current) + '%';
+                    requestAnimationFrame(update);
+                };
+                update();
+            });
+        }
+        ScrollTrigger.create({ trigger: '#skills', start: 'top 75%', onEnter: animateNumbers, once: true });
+
+        // Progress bars
+        const progressBars = document.querySelectorAll('.progress-fill');
+        function animateBars() {
+            progressBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80 && !bar.style.width) {
+                    bar.style.width = bar.getAttribute('data-progress') + '%';
+                }
+            });
+        }
+        window.addEventListener('scroll', animateBars, { passive: true });
+        window.addEventListener('load', animateBars);
+
+        // Live visitor counter
+        let visitorBase = 42, onlineBase = 5;
+        const visitorEl = document.getElementById('visitorCount');
+        const onlineEl = document.getElementById('onlineCount');
+        function updateStats() {
+            visitorBase += Math.floor(Math.random() * 3) + 1;
+            visitorEl.textContent = visitorBase;
+            if (Math.random() < 0.2) { onlineBase = Math.floor(Math.random() * 12) + 1; onlineEl.textContent = onlineBase; }
+        }
+        updateStats(); setInterval(updateStats, 1000);
+
+        // Contact form — Google Sheets integration (same sheet as Mozahid's portfolio)
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUCRG5lBEt_Uq7bxX4rQtgknujZKPyOf64Z5tNzIJEbnr42UmGBKELGSXsbEV1XvSjiA/exec';
+
+        const form = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: this.name.value,
+                email: this.email.value,
+                number: this.number.value,
+                subject: this.subject.value,
+                message: this.message.value
+            };
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = 'Sending...';
+            submitBtn.disabled = true;
+            formMessage.style.display = 'none';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                formMessage.textContent = '✅ Message sent! Afsad will get back to you soon.';
+                formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
+                form.reset();
+            })
+            .catch(() => {
+                formMessage.textContent = '❌ Oops! Something went wrong. Please try again.';
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+                submitBtn.disabled = false;
+                setTimeout(() => formMessage.style.display = 'none', 4000);
+            });
+        });
+    </script>
+</body>
+</html>
