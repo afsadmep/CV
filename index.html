@@ -288,7 +288,7 @@
 
         /* === TABLET (max 992px) === */
         @media (max-width: 992px) {
-            html { font-size: 56.25%; }
+            html { font-size: 58%; }
             section { padding: 10rem 6% 4rem; }
             .header { padding: 1.4rem 6%; }
             .home { gap: 4rem; padding-top: 11rem; }
@@ -306,72 +306,87 @@
 
         /* === MOBILE (max 768px) === */
         @media (max-width: 768px) {
-            html { font-size: 52%; }
+            html { font-size: 62.5%; } /* Keep base size — use px overrides below for readability */
             section { padding: 9rem 5% 4rem; min-height: auto; }
             .header { padding: 1.2rem 5%; }
             .home { flex-direction: column; text-align: center; gap: 3rem; padding-top: 10rem; padding-bottom: 5rem; }
             .home-img img { width: 18rem; height: 18rem; }
-            .home-content h1 { font-size: 3.8rem; }
-            .home-content h3 { font-size: 2rem; }
-            .home-content p { font-size: 1.55rem; max-width: 100%; }
+            .home-content h1 { font-size: 3.2rem; }
+            .home-content h3 { font-size: 1.8rem; }
+            .home-content p { font-size: 1.6rem; max-width: 100%; }
             .social-media { justify-content: center; }
-            .btn { font-size: 1.5rem; padding: 1.1rem 2.4rem; }
+            .btn { font-size: 1.6rem; padding: 1.2rem 2.4rem; }
             .about { flex-direction: column; gap: 3rem; text-align: center; }
             .about-content h2 { text-align: center !important; }
             .about-stats { justify-content: center; }
             .stat-chip { padding: 1.2rem 2rem; }
-            .stat-chip strong { font-size: 2.2rem; }
+            .stat-chip strong { font-size: 2.4rem; }
+            .stat-chip span { font-size: 1.4rem; }
             .about-icon-side { display: none; }
             .services-container { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
             .services-box { padding: 3rem 2.5rem; }
             .services-box i { font-size: 4rem; }
-            .services-box h3 { font-size: 1.9rem; }
+            .services-box h3 { font-size: 2rem; }
+            .services-box p { font-size: 1.55rem; }
             .skills-container { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
             .skill-card { padding: 2.5rem; }
-            .skill-card h3 { font-size: 1.7rem; }
+            .skill-card h3 { font-size: 1.8rem; }
+            .skill-info { font-size: 1.5rem; }
             .timeline { margin-top: 3rem; }
             .timeline::before { left: 1.2rem; }
             .timeline-item { padding-left: 4rem; margin-bottom: 3rem; }
             .timeline-item::before { left: 0.2rem; width: 2rem; height: 2rem; }
             .timeline-content { padding: 2rem; }
-            .timeline-content h3 { font-size: 1.75rem; }
-            .timeline-company { font-size: 1.35rem; }
-            .timeline-list li { font-size: 1.38rem; }
-            .timeline-date { font-size: 1.28rem; }
+            .timeline-content h3 { font-size: 1.85rem; }
+            .timeline-company { font-size: 1.5rem; }
+            .timeline-list li { font-size: 1.5rem; }
+            .timeline-date { font-size: 1.4rem; }
             .projects-grid { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
             .project-img { height: 17rem; }
             .project-info { padding: 2rem; }
-            .project-info h3 { font-size: 1.75rem; }
+            .project-info h3 { font-size: 1.85rem; }
+            .project-info p { font-size: 1.5rem; }
+            .tech { font-size: 1.35rem; }
             .contact form { margin-top: 3rem; }
             .input-box { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
-            .input-box input, textarea { font-size: 1.5rem; padding: 1.4rem 1.6rem; }
+            .input-box input, textarea { font-size: 1.6rem; padding: 1.5rem 1.8rem; }
             textarea { margin-bottom: 1.5rem; }
-            .heading { font-size: 3.2rem; }
+            .heading { font-size: 3rem; }
             .footer { padding: 2.5rem 5%; }
-            .footer .copyright { font-size: 1.3rem; }
+            .footer .copyright { font-size: 1.5rem; }
+            .logo { font-size: 2.2rem; }
+            .navbar a { font-size: 1.8rem; }
         }
 
         /* === SMALL MOBILE (max 480px) === */
         @media (max-width: 480px) {
-            html { font-size: 48%; }
+            html { font-size: 62.5%; } /* Keep base — explicit sizes below are already readable */
             section { padding: 9rem 4% 3rem; }
             .header { padding: 1.2rem 4%; }
             .home-img img { width: 16rem; height: 16rem; }
-            .home-content h1 { font-size: 3.4rem; }
-            .home-content h3 { font-size: 1.8rem; }
-            .home-content p { font-size: 1.5rem; }
-            .heading { font-size: 2.8rem; }
+            .home-content h1 { font-size: 2.8rem; }
+            .home-content h3 { font-size: 1.7rem; }
+            .home-content p { font-size: 1.55rem; }
+            .heading { font-size: 2.6rem; }
             .stat-chip { padding: 1rem 1.5rem; flex: 1 1 auto; min-width: 12rem; }
-            .stat-chip strong { font-size: 2rem; }
+            .stat-chip strong { font-size: 2.2rem; }
+            .stat-chip span { font-size: 1.3rem; }
             .about-stats { gap: 1.2rem; }
-            .services-box h3 { font-size: 1.75rem; }
-            .services-box p { font-size: 1.4rem; }
+            .services-box h3 { font-size: 1.85rem; }
+            .services-box p { font-size: 1.5rem; }
             .timeline-content { padding: 1.6rem; }
-            .timeline-content h3 { font-size: 1.6rem; }
-            .timeline-list li { font-size: 1.32rem; }
-            .project-info h3 { font-size: 1.6rem; }
-            .project-info p { font-size: 1.38rem; }
+            .timeline-content h3 { font-size: 1.7rem; }
+            .timeline-list li { font-size: 1.45rem; }
+            .timeline-company { font-size: 1.4rem; }
+            .timeline-date { font-size: 1.35rem; }
+            .project-info h3 { font-size: 1.7rem; }
+            .project-info p { font-size: 1.45rem; }
             .footer .social a { width: 4rem; height: 4rem; font-size: 1.7rem; }
+            .footer .copyright { font-size: 1.4rem; }
+            .skill-card h3 { font-size: 1.7rem; }
+            .skill-info { font-size: 1.45rem; }
+            .input-box input, textarea { font-size: 1.55rem; }
+            .btn { font-size: 1.55rem; }
         }
 
         /* === TOUCH DEVICE: disable sticky hover effects === */
